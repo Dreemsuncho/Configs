@@ -78,6 +78,11 @@
 (global-set-key (kbd "S-<f12>") 'xref-pop-marker-stack)
 (global-set-key (kbd "M-q") 'elpy-doc)
 (global-set-key (kbd "M-<f8>") 'elpy-autopep8-fix-code)
+;window resize
+(global-set-key (kbd "C-M-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "C-M-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-M-<down>") 'shrink-window)
+(global-set-key (kbd "C-M-<up>") 'enlarge-window)
 
 ;;AUTOGEN-------------------------------------------------------
 (custom-set-variables
