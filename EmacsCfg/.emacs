@@ -3,7 +3,6 @@
 ;;;INSTALL PACKAGES;;;
 ;-------------------------------------------
 (require 'package)
-
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.org/packages/"))
 
@@ -36,7 +35,7 @@
 
 ; remove default elpy-kbd's
 (eval-after-load "elpy"
-  '(cl-dolist (key '("<M-down>" "<M-up>" "<C-up>" "<C-down>" "C->" "C-<" "C-c C-<" "C-."))
+  '(cl-dolist (key '("<M-down>" "<M-up>" "<C-up>" "<C-down>" "C->" "C-<" "C-c C-<" "C-." "C-d"))
      (define-key elpy-mode-map (kbd key) nil)))
 
 
@@ -51,10 +50,11 @@
 ;;THEME
 (load-theme 'material t) ;; load material theme
 (global-linum-mode t) ;; enable line numbers globally
-
 (global-visual-line-mode t) ;; word wrapping
+(highlight-indentation-mode t)
 ;set font
 (set-default-font "consolas")
+
 ;;CURSOR
 (set-cursor-color "magenta3") ; set cursor color
 
@@ -83,8 +83,27 @@
 (global-set-key (kbd "C-M-<right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "C-M-<down>") 'shrink-window)
 (global-set-key (kbd "C-M-<up>") 'enlarge-window)
+;upper-lower casing
+(global-set-key(kbd "C-u") 'upcase-dwim)
+(global-set-key(kbd "C-l") 'downcase-dwim)
+;duplicate current line
+(global-set-key (kbd "C-d") (lambda()
+			      (interactive)
+			      (move-beginning-of-line 1)
+			      (kill-line)
+			      (yank)
+			      (open-line 1)
+			      (next-line 1)
+			      (yank)))
+;newline without break
+(global-set-key (kbd "<S-return>") (lambda()
+				     (interactive)
+				     (end-of-line)
+				     (newline-and-indent)))
+;comment uncomment region
+(global-set-key (kbd "C-/") 'comment-line)
 
-;;AUTOGEN-------------------------------------------------------
+;; AUTOCONFIG
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -92,7 +111,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (multiple-cursors py-autopep8 material-theme flycheck elpy ein better-defaults))))
+    (ein py-autopep8 multiple-cursors material-theme flycheck elpy better-defaults))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
