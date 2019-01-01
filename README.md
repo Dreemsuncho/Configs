@@ -1,2 +1,1 @@
-# Configs
-Just storing different cfg's for safety
+## Storing different text editors configs
