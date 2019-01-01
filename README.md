@@ -1,1 +1,2 @@
-## Storing different text editors configs
+# Configurations
+This repo stores different text editors configs
