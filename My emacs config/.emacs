@@ -5,12 +5,18 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; My macros
+(fset 'my-macro
+      [home ?\M-x ?f ?o ?r ?w ?a ?r ?d ?- ?w ?h tab return left S-home S-right ?\M-w down home ?\M-x ?f ?o ?r ?w ?a ?r ?d ?- ?w ?h ?i tab return left S-home S-right backspace ?\C-y])
+(global-set-key (kbd "C-q") 'my-macro)
+
 ;; install packages
 (defvar my-packages
-  '(material-theme
+  '(better-defaults
     cider
     clojure-mode
-    projectile))
+    projectile
+    material-theme))
 
 (mapc #'(lambda (package)
     (unless (package-installed-p package)
@@ -23,6 +29,9 @@
 (global-visual-line-mode t)   ; word wrapping
 (set-default-font "consolas") ; set default font
 (set-cursor-color "magenta2") ; set cursor color
+(electric-pair-mode t) ; auto-brackets/quotes
+(show-paren-mode t) ; show matching bracket(scope)
+
 
 ;; #Keybindings#
 (global-set-key (kbd "<C-up>") 'scroll-down-line)
@@ -96,6 +105,20 @@
 (global-set-key (kbd "C-S-<up>") 'move-lines-up)
 (global-set-key (kbd "C-S-<down>") 'move-lines-down)
 ;;;;;;;;;;;;;;;;;;--LIB-1-END--;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;--LIB-2-START--;;;;;;;;;;;;;;;;;;;;
+;duplicate current line
+(defun duplicate-line()
+  (interactive)
+  (move-beginning-of-line 1)
+  (kill-line)
+  (yank)
+  (open-line 1)
+  (next-line 1)
+  (yank)
+  )
+
+(global-set-key (kbd "C-d") 'duplicate-line)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
